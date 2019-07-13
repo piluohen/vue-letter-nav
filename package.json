@@ -17,8 +17,9 @@
   "private": false,
   "scripts": {
     "dev": "vue-cli-service serve",
-    "docs": "vuepress dev docs",
-    "build": "vuepress build docs",
+    "build": "vue-cli-service build",
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs",
     "lib": "vue-cli-service build --target lib --name vue-letter-nav --dest lib packages/index.js"
   },
   "dependencies": {
