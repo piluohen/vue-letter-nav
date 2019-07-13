@@ -1,11 +1,25 @@
 {
   "name": "vue-letter-nav",
   "version": "0.1.0",
-  "private": true,
+  "description": "A Letter Nav component for Vue.js",
+  "keywords": [
+    "vue",
+    "letter",
+    "nav",
+    "component"
+  ],
+  "files": [
+    "lib/vue-letter-nav.umd.min.js",
+    "lib/vue-letter-nav.css",
+    "packages"
+  ],
+  "main": "lib/vue-letter-nav.umd.min.js",
+  "private": false,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "dev": "vue-cli-service serve",
+    "docs": "vuepress dev docs",
+    "build": "vuepress build docs",
+    "lib": "vue-cli-service build --target lib --name vue-letter-nav --dest lib packages/index.js"
   },
   "dependencies": {
     "core-js": "^2.6.5",
@@ -17,10 +31,16 @@
     "@vue/cli-service": "^3.9.0",
     "@vue/eslint-config-standard": "^4.0.0",
     "babel-eslint": "^10.0.1",
+    "babel-plugin-dynamic-import-node": "^2.3.0",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
+    "markdown-it-checkbox": "^1.1.0",
+    "markdown-it-kbd": "^2.0.0",
     "node-sass": "^4.9.0",
+    "pug": "^2.0.4",
+    "pug-plain-loader": "^1.0.0",
     "sass-loader": "^7.1.0",
-    "vue-template-compiler": "^2.6.10"
+    "vue-template-compiler": "^2.6.10",
+    "vuepress": "^1.0.2"
   }
 }
