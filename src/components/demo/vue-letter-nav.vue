@@ -20,7 +20,6 @@ export default {
   methods: {
     handleCheck (data) {
       this.checkList = data
-      console.log(data)
     }
   }
 }

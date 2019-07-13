@@ -2,6 +2,24 @@
 
 一个基于vue的字母导航组件
 
+[demo](https://piluohen.github.io/vue-letter-nav/)
+注：请F12，选择手机模式查看，或者本地运行在手机浏览器上的查看
+
+## 构建命令
+
+```
+
+# 安装依赖
+npm install
+
+# 启动本地服务（默认localhost与ip） localhost:8080
+npm run dev
+
+# 打包示例
+npm run bulid
+
+```
+
 ## Api
 
 | 参数 | 描述 | 类型 | 可选值 | 必须 | 默认值 |
