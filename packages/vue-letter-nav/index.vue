@@ -1,64 +1,66 @@
 <template lang="pug">
-.alph-nav-page
+.vue-letter-nav
   .check-all-btn(v-if="multiple" @click="checkAllHandle") 全部
-  .alpha-nav(ref="alphaNav")
-    .alpha-nav-list(
+  .letter-content(ref="alphaNav")
+    letter-content-item(
       v-for="(item, index) in listModify"
       :key="item.value"
+      :model.sync="data[item.value]"
+      :data="item"
+      :readonly="readonly || disabled"
+      @click="handleCheck"
     )
-      List(
-        ref="alphaNavList"
-        type="text",
-        :disabled="readonly || disabled"
-        :label="item.name"
-        :model.sync="data[item.name]"
-        :rightText="readonly ? item.show : ''"
-        :border="index !== listModify.length - 1",
-        @click="checkHandle"
-      )
-        template(slot="left")
-          span.alpha-nav-first(
-            :data-en="item.alpha"
-            :class="{'first': item.alpha}") {{item.alpha}}
-          span.icon √
-          span {{item.name}}
-  .alpha-list(ref="alphaList" v-if="!readonly")
+      template(slot="content")
+        slot(
+          name="content"
+          :data="item"
+        )
+  .letter-aside(ref="alphaList" v-if="showLetter")
     ul(
-      class="char-list"
+      class="letter-list"
       ref="charBar"
       @touchstart="e => touchStart(e)"
       @touchmove="e => touchMove(e)"
       @touchend="e => touchEnd(e)"
     )
-      li.char-item(
-        :class="{'active': activeChar === char}"
-        v-for="(char,index) in charList"
+      li.letter-item(
+        v-for="(item,index) in charList"
         :key="index"
+        :class="{'active': activeChar === item}"
       )
-        span {{char}}
-  .char-tip(v-show="isTouching" v-if="!readonly") {{lastChar}}
+        span {{item}}
+  .letter-tip(v-show="isTouching" v-if="showLetter") {{lastChar}}
 </template>
 <script>
-import List from './list.vue'
+import LetterContentItem from './letter-content-item.vue'
 export default {
   name: 'vue-letter-nav',
-  components: { List },
+  components: { LetterContentItem },
   props: {
+    // 已选中列表
     check: {
       type: Array,
       default: () => []
     },
+    // 所有列表
     list: {
       type: Array,
       default: () => []
     },
+    // 是否可以多选
     multiple: {
       type: Boolean,
       default: false
     },
+    // 是否只读
     readonly: {
       type: Boolean,
       default: false
+    },
+    // 显示字母导航
+    showLetter: {
+      type: Boolean,
+      default: true
     }
   },
   data () {
@@ -79,7 +81,7 @@ export default {
     },
     data () {
       let obj = {}
-      this.check.forEach(item => {
+      this.checkList.forEach(item => {
         obj[item] = true
       })
       return obj
@@ -91,6 +93,7 @@ export default {
     this.checkList = [].concat(this.check)
   },
   methods: {
+    // 节流
     throttle (methods) {
       setTimeout(() => {
         methods.call()
@@ -108,7 +111,7 @@ export default {
       this.touchStartMethod(e)
     },
     touchStartMethod (e) {
-      let top = this.$refs.alphaList.offsetTop
+      let top = this.$refs.charBar.offsetTop
       const char = this.getChar(e.touches[0].clientY - top)
       this.activeChar = char
       this.gotoChar(char)
@@ -137,23 +140,21 @@ export default {
       }
     },
     // 选中操作
-    checkHandle (val) {
+    handleCheck (val) {
       this.disabled = true
       if (!this.multiple) {
         this.checkList = []
-        if (val.value) {
-          this.checkList.push(val.label)
+        if (val.checked) {
+          this.checkList.push(val.value)
         }
       } else {
-        if (val.value) {
-          this.checkList.push(val.label)
+        if (val.checked) {
+          this.checkList.push(val.value)
         } else {
-          this.checkList.splice(this.checkList.indexOf(val.label), 1)
+          this.checkList.splice(this.checkList.indexOf(val.value), 1)
         }
       }
-      this.throttle(() => {
-        this.disabled = false
-      })
+      this.disabled = false
       this.emitData(this.checkList)
     },
     // 全部选中操作
@@ -161,7 +162,7 @@ export default {
       this.checkAll = !this.checkAll
       if (this.checkAll) {
         this.checkList = this.listModify.map(item => {
-          return item.name
+          return item.value
         })
       } else {
         this.checkList = []
@@ -176,21 +177,49 @@ export default {
 </script>
 
 <style lang="stylus">
-.alph-nav-page {
+ellipsis() {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.vue-letter-nav {
   .check-all-btn {
-    height: 1.7rem;
-    line-height: 1.7rem;
-    padding-left: 1rem;
-    font-size: 0.7rem;
+    height: 36px;
+    line-height: 36px;
+    padding-left: 20px;
+    font-size: 14px;
     color: blue;
   }
 
-  .alpha-nav {
-    font-size: 0.7rem;
+  .letter-content {
+    font-size: 14px;
 
-    .alpha-nav-first {
+    .letter-content-item {
+      display: flex;
+      margin-left: 20px;
+      height: 36px;
+      line-height: 36px;
+      padding: 0 20px 0 0;
+      font-size: 16px;
+      border-bottom: 1px solid #efefef;
+      ellipsis();
+
+      .letter-content-icon {
+        padding-right: 15px;
+        visibility: hidden;
+      }
+
+      &.checked {
+        .letter-content-icon {
+          visibility: visible;
+        }
+      }
+    }
+
+    .letter-content-first {
       display: inline-block;
-      width: 1.2rem;
+      width: 24px;
       visibility: hidden;
       color: blue;
 
@@ -200,7 +229,7 @@ export default {
     }
   }
 
-  .alpha-list {
+  .letter-aside {
     height: 100vh;
     position: fixed;
     right: 0;
@@ -208,15 +237,12 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 2rem;
-    // height 100vh
+    width: 40px;
     z-index: 123456;
     margin: 0;
-    // padding: 3.8rem 0 4.4rem 0
     box-sizing: border-box;
 
-    // background-color rgba(0, 0, 0, 0.5)
-    .char-list {
+    .letter-list {
       width: 100%;
       height: 90%;
       display: flex;
@@ -227,17 +253,17 @@ export default {
       margin: 0;
     }
 
-    .char-item {
+    .letter-item {
       text-align: center;
       width: 100%;
-      height: 0.8rem;
-      font-size: 0.6rem;
+      height: 16px;
+      font-size: 14px;
 
       span {
         display: inline-block;
-        width: 0.8rem;
-        height: 0.8rem;
-        line-height: 0.8rem;
+        width: 16px;
+        height: 16px;
+        line-height: 16px;
         border-radius: 50%;
       }
 
@@ -249,7 +275,7 @@ export default {
     }
   }
 
-  .char-tip {
+  .letter-tip {
     position: fixed;
     width: 50px;
     height: 50px;

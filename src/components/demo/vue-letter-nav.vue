@@ -1,6 +1,9 @@
 <template lang="pug">
   .vue-letter-nav-demo
-    vue-letter-nav(:check="checkList" :list="allList" :multiple="false" @check="handleCheck")
+    vue-letter-nav(:check="checkList" :list="allList" :multiple="true" :readonly="false" @check="handleCheck")
+      //- template(slot="content" slot-scope="{data}")
+      //-   span.letter-content-icon √
+      //-   span {{data.name}}
 </template>
 <script>
 import country from './country'
