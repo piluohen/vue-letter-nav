@@ -2,7 +2,7 @@
 
 一个基于vue的字母导航组件
 
-[demo](https://piluohen.github.io/vue-letter-nav/)<br>
+[demo](https://piluohen.github.io/vue-letter-nav/index.html)<br>
 注：请F12，选择手机模式查看，或者本地运行在手机浏览器上的查看
 
 ## 构建命令
