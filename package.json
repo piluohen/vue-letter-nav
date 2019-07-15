@@ -1,6 +1,11 @@
 {
   "name": "vue-letter-nav",
-  "version": "0.1.0",
+  "version": "0.1.1",
+  "author": {
+    "name": "piluohen<1012106967@qq.com>"
+  },
+  "homepage": "https://github.com/piluohen/vue-letter-nav",
+  "repository": "https://github.com/piluohen/vue-letter-nav",
   "description": "A Letter Nav component for Vue.js",
   "keywords": [
     "vue",
@@ -23,7 +28,6 @@
     "lib": "vue-cli-service build --target lib --name vue-letter-nav --dest lib packages/index.js"
   },
   "dependencies": {
-    "core-js": "^2.6.5",
     "vue": "^2.6.10"
   },
   "devDependencies": {
