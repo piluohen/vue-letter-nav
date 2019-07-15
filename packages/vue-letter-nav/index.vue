@@ -61,6 +61,17 @@ export default {
     showLetter: {
       type: Boolean,
       default: true
+    },
+    // 滚动设置
+    scrollOptions: {
+      type: Object,
+      default: () => {
+        return {
+          behavior: 'auto',
+          block: 'center',
+          inline: 'center'
+        }
+      }
     }
   },
   data () {
@@ -134,9 +145,7 @@ export default {
       this.lastChar = char
       const target = document.querySelector('[data-en="' + char + '"]')
       if (target) {
-        target.scrollIntoView({
-          block: 'center'
-        })
+        target.scrollIntoView(this.scrollOptions)
       }
     },
     // 选中操作

@@ -2,7 +2,7 @@
 
 一个基于vue的字母导航组件
 
-[demo](https://piluohen.github.io/vue-letter-nav/)
+[demo](https://piluohen.github.io/vue-letter-nav/)<br>
 注：请F12，选择手机模式查看，或者本地运行在手机浏览器上的查看
 
 ## 构建命令
@@ -29,6 +29,8 @@ npm run bulid
 | multiple | 是否多选 | Boolean |  | false | false |
 | readonly | 是否只读 | Boolean |  | false | false |
 | showLetter | 显示字母导航 | Boolean |  | false | true |
+| scrollOptions | 滚动行为 | Object |  | false |
+
 
 ```js
 # list数据格式如下：
@@ -57,11 +59,22 @@ npm run bulid
 
 ```
 
+## scrollOptions API
+
+因为引用了 [MDN: scrollIntoView()](https://developer.mozilla.org/zh-CN/docs/Web/API/Element/scrollIntoView)，故可参考其相关配置
+
+| 参数 | 描述 | 类型 | 可选值 | 必须 | 默认值 |
+| -- |:----: | :--: | :--: | :--: | -- |
+| behavior | 定义滚动动画 | String | auto（自动）\| instant（无滚动）\| smooth（缓动）| false | auto |
+| block | 设置滚动指定元素位置 | String | start（顶部）\| center（居中）\| end（底部）\| nearest（最近的）| false | center |
+| inline | 设置滚动指定元素位置 | String | start（顶部）\| center（居中）\| end（底部）\| nearest（最近的）| false | center |
+
 ## slot
 
 | 参数 | 描述 | 类型 | 可选值 | 必须 | 默认值 |
 | -- |:----: | :--: | :--: | :--: | -- |
 | content | 子项内容 | | | | |
+
 
 ```js
 
@@ -75,6 +88,12 @@ vue-letter-nav(:check="checkList" :list="allList" :multiple="true" :readonly="fa
 
 ```
 
-## 源码地址
+## 更新日志
 
-[GitHub(https://github.com/piluohen/vue-letter-nav)](https://github.com/piluohen/vue-letter-nav)
+0.1.0
+
+1. 基础版本发布
+
+0.1.1
+
+1. 增加scrollOptions配置
