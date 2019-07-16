@@ -5,6 +5,23 @@
 [demo](https://piluohen.github.io/vue-letter-nav/index.html)<br>
 注：请F12，选择手机模式查看，或者本地运行在手机浏览器上的查看
 
+## 使用
+
+```
+# 安装 npm 包
+npm install -S vue-letter-nav
+
+# 项目引入css
+import "~vue-letter-nav/lib/vue-letter-nav.css";
+
+# 项目main.js引入组件, 全局引入
+
+import VueLetterNav from 'vue-letter-nav'
+
+Vue.use(VueLetterNav)
+
+```
+
 ## 构建命令
 
 ```
