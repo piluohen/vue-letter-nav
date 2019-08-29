@@ -7,7 +7,7 @@
 
 ## 使用
 
-```
+``` 
 # 安装 npm 包
 npm install -S vue-letter-nav
 
@@ -24,7 +24,7 @@ Vue.use(VueLetterNav)
 
 ## 构建命令
 
-```
+``` 
 
 # 安装依赖
 npm install
@@ -48,32 +48,26 @@ npm run bulid
 | showLetter | 显示字母导航 | Boolean |  | false | true |
 | scrollOptions | 滚动行为 | Object |  | false |
 
-
-```js
-# list数据格式如下：
-{
-  name: '安哥拉',
-  value: 'Angola',
-  alpha: 'A'
-},
-{
-  name: '阿富汗',
-  value: 'Afghanistan'
-},
-{
-  name: '阿尔巴尼亚',
-  value: 'Albania'
-},
-{
-  name: '巴哈马',
-  value: 'Bahamas',
-  alpha: 'B'
-},
-{
-  name: '巴林',
-  value: 'Bahrain'
+``` js
+#
+list数据格式如下： {
+    name: '安哥拉',
+    value: 'Angola',
+    alpha: 'A'
+}, {
+    name: '阿富汗',
+    value: 'Afghanistan'
+}, {
+    name: '阿尔巴尼亚',
+    value: 'Albania'
+}, {
+    name: '巴哈马',
+    value: 'Bahamas',
+    alpha: 'B'
+}, {
+    name: '巴林',
+    value: 'Bahrain'
 }
-
 ```
 
 ## scrollOptions API
@@ -92,17 +86,23 @@ npm run bulid
 | -- |:----: | :--: | :--: | :--: | -- |
 | content | 子项内容 | | | | |
 
+``` js
+#
+支持slot， 可以自定义slot子项的内容， 如下所示# data为的子项的数据， 格式： {
+    name: '',
+    value: ''
+}
 
-```js
-
-# 支持slot，可以自定义slot子项的内容，如下所示
-# data为的子项的数据，格式：{ name: '', value: '' }
-
-vue-letter-nav(:check="checkList" :list="allList" :multiple="true" :readonly="false" @check="handleCheck")
-  template(slot="content" slot-scope="{data}")
-    span.letter-content-icon √
-    span {{data.name}}
-
+vue - letter - nav(: check = "checkList": list = "allList": multiple = "true": readonly = "false"
+    @check = "handleCheck")
+template(slot = "content"
+    slot - scope = "{data}")
+span.letter - content - icon√
+span {
+    {
+        data.name
+    }
+}
 ```
 
 ## 更新日志
@@ -114,3 +114,8 @@ vue-letter-nav(:check="checkList" :list="allList" :multiple="true" :readonly="fa
 0.1.1
 
 1. 增加scrollOptions配置
+
+0.1.3
+
+1. 升级依赖
+
