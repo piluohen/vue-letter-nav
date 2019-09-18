@@ -86,23 +86,20 @@ list数据格式如下： {
 | -- |:----: | :--: | :--: | :--: | -- |
 | content | 子项内容 | | | | |
 
-``` js
-#
-支持slot， 可以自定义slot子项的内容， 如下所示# data为的子项的数据， 格式： {
-    name: '',
-    value: ''
+``` html
+支持slot， 可以自定义slot子项的内容， 如下所示# data为的子项的数据，
+格式：
+{
+name: '',
+value: ''
 }
 
-vue - letter - nav(: check = "checkList": list = "allList": multiple = "true": readonly = "false"
-    @check = "handleCheck")
-template(slot = "content"
-    slot - scope = "{data}")
-span.letter - content - icon√
-span {
-    {
-        data.name
-    }
-}
+<vue-letter-nav :check="checkList" :list="allList" :multiple="true" :readonly="false" @check="handleCheck">
+</vue-letter-nav>
+<template slot="content" slot-scope="{data}">
+    <span class="letter-content-icon">√</span>
+    <span>{{data.name}}</span>
+</template>
 ```
 
 ## 更新日志
