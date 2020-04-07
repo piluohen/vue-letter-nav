@@ -9,16 +9,15 @@
 import country from './country'
 export default {
   name: 'demo-vue-letter-nav',
-  data () {
+  data() {
     return {
       checkList: [],
       allList: country
     }
   },
-  mounted () {
-  },
+  mounted() {},
   methods: {
-    handleCheck (data) {
+    handleCheck(data) {
       this.checkList = data
     }
   }

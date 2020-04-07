@@ -24,32 +24,31 @@ export default {
     },
     data: {
       type: Object,
-      default: () => { }
+      default: () => {}
     },
     readonly: {
       type: Boolean,
       default: false
     }
   },
-  data () {
+  data() {
     return {
       check: this.model
     }
   },
   computed: {
-    getChecked () {
+    getChecked() {
       return this.check ? 'checked' : ''
     }
   },
-  mounted () {
-  },
+  mounted() {},
   watch: {
-    model () {
+    model() {
       this.check = this.model
     }
   },
   methods: {
-    click () {
+    click() {
       if (!this.readonly) {
         this.check = !this.check
         this.$emit('update:model', this.check)

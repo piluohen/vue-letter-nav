@@ -74,7 +74,7 @@ export default {
       }
     }
   },
-  data () {
+  data() {
     return {
       charList: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
       isTouching: false,
@@ -87,10 +87,10 @@ export default {
     }
   },
   computed: {
-    listModify () {
+    listModify() {
       return this.list
     },
-    data () {
+    data() {
       let obj = {}
       this.checkList.forEach(item => {
         obj[item] = true
@@ -98,47 +98,46 @@ export default {
       return obj
     }
   },
-  beforeMount () {
-  },
-  mounted () {
+  beforeMount() {},
+  mounted() {
     this.checkList = [].concat(this.check)
   },
   methods: {
     // 节流
-    throttle (methods) {
+    throttle(methods) {
       setTimeout(() => {
         methods.call()
       }, 150)
     },
-    touchStart (e) {
+    touchStart(e) {
       e.preventDefault()
       this.throttle(() => {
         this.isTouching = true
         this.touchStartMethod(e)
       })
     },
-    touchMove (e) {
+    touchMove(e) {
       e.preventDefault()
       this.touchStartMethod(e)
     },
-    touchStartMethod (e) {
+    touchStartMethod(e) {
       let top = this.$refs.charBar.offsetTop
       const char = this.getChar(e.touches[0].clientY - top)
       this.activeChar = char
       this.gotoChar(char)
     },
-    touchEnd (e) {
+    touchEnd(e) {
       e.preventDefault()
       this.throttle(() => {
         this.isTouching = false
       })
     },
-    getChar (clientY) {
+    getChar(clientY) {
       const charHeight = this.$refs.charBar.offsetHeight / this.charList.length
       const index = Math.floor((clientY - this.boxClientTop) / charHeight)
       return this.charList[index]
     },
-    gotoChar (char) {
+    gotoChar(char) {
       if (char === this.lastChar) {
         return false
       }
@@ -149,7 +148,7 @@ export default {
       }
     },
     // 选中操作
-    handleCheck (val) {
+    handleCheck(val) {
       this.disabled = true
       if (!this.multiple) {
         this.checkList = []
@@ -167,7 +166,7 @@ export default {
       this.emitData(this.checkList)
     },
     // 全部选中操作
-    checkAllHandle () {
+    checkAllHandle() {
       this.checkAll = !this.checkAll
       if (this.checkAll) {
         this.checkList = this.listModify.map(item => {
@@ -178,7 +177,7 @@ export default {
       }
       this.emitData(this.checkList)
     },
-    emitData (arr) {
+    emitData(arr) {
       this.$emit('check', arr)
     }
   }
